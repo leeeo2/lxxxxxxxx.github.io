@@ -1,20 +1,16 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
+description: 分享技术的快乐
+keywords: 技术菜鸟
 comments: true
 menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+分享技术的快乐
 
-仰慕「优雅编码的艺术」。
-
-坚信熟能生巧，努力改变人生。
-
-## 联系
+<!-- ## 联系
 
 <ul>
 {% for website in site.data.social %}
@@ -23,7 +19,7 @@ permalink: /about/
 {% if site.url contains 'mazhuang.org' %}
 <li>
 微信公众号：<br />
-<img style="height:192px;width:192px;border:1px solid lightgrey;" src="{{ assets_base_url }}/assets/images/qrcode.jpg" alt="闷骚的程序员" />
+<img style="height:192px;width:192px;border:1px solid lightgrey;" src="{{ assets_base_url }}/assets/images/qrcode.jpg" alt="技术菜鸟" />
 </li>
 {% endif %}
 </ul>
@@ -38,4 +34,4 @@ permalink: /about/
 <button class="btn btn-outline" type="button">{{ keyword }}</button>
 {% endfor %}
 </div>
-{% endfor %}
+{% endfor %} -->
