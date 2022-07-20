@@ -1,7 +1,18 @@
+---
+layout: post
+title: "go protobuf、grpc and grpc-gateway简介"
+subtitle: "go protobuf grpc and grpc-gateway"
+author: "技术菜鸟"
+header-style: text
+description: go protobuf、grpc and grpc-gateway简介
+categories: [go]
+tags:
+  - go
+---
 
 
 # protocol buffer介绍  
-protobuf是google开源的数据交换格式，它有两个必要组成部分：
+protobuf是google开源的数据交换格式，类似于json、xml等，它有两个必要组成部分：
 - protocol compiler：协议编译器，用来编译 .proto 文件，它是用 C++ 写的，可以直接[ 下载 ](https://github.com/protocolbuffers/protobuf/releases)安装二进制使用，或者基于源码编译，由于是开源的，也可以基于代码进行修改和扩展。[ 代码库 ](https://github.com/protocolbuffers/protobuf)中有更详细的介绍。
 - protobuf运行时：protobuf 支持多个语言，可以在下列相应的代码库中找到安装方法。  
 
