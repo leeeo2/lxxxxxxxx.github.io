@@ -35,7 +35,7 @@ brew install hashicorp/tap/terraform
 
 
 # Terraform 语法
-terraform通过hcl语言定义基础设施的操作（目前也支持json），以下述为例，在一个空目录中创建一个main.tf文件，用于在ucloud云上创建一个ecs和一个eip，并创建一个ecs和eip的绑定关系。
+terraform通过[HCL语言](https://github.com/hashicorp/hcl/blob/main/hclsyntax/spec.md)定义基础设施的操作（目前也支持json），以下述为例，在一个空目录中创建一个main.tf文件，用于在ucloud云上创建一个ecs和一个eip，并创建一个ecs和eip的绑定关系。
 
 ```go
 terraform {   // 定义terraform的版本和provider插件的版本
@@ -104,6 +104,11 @@ output "eip" {
 ```
 这里的资源（resource）是一个抽象概念，不一定是ECS这样的实体才是资源，比如ecs和eip的绑定关系也可以是一个资源，创建这样一个资源后端的操作就是把对应的ecs和eip进行绑定。
 
+## 支持的数据类型
+参考：[文档](https://lonegunmanb.github.io/introduction-terraform/3.1.%E7%B1%BB%E5%9E%8B.html)  
+基本类型：string，number，bool  
+复杂类型：map，list，set，object，tuple，any，null
+
 # terraform基础操作
 
 - 初始化
@@ -131,3 +136,45 @@ terraform destroy
 将会销毁创建的资源，terraform.tfstate也会做相应改变。
 
 
+
+
+
+# 其他
+可以通过设置名为TF_VAR_<NAME>的环境变量为输入变量赋值。
+
+## 插件搜索路径
+Terraform隐式尝试在用户插件目录`~/.terraform.d/plugins/${host_name}/${namespace}/${type}/${version}/${target}`或`%APPDATA%\terraform.d\plugins\${host_name}/${namespace}/${type}/${version}/${target}`下搜索插件，用户也可以显示指定本地插件安装路径。
+> 对于 v0.13.0 之前的 Terraform 版本，Terraform 将尝试通过根用户插件目录中的二进制名称来定位提供程序。
+
+```bash
+provider_installation {
+  filesystem_mirror {
+    path    = "/usr/share/terraform/providers"
+    include = ["example.com/*/*"]
+  }
+  direct {
+    exclude = ["example.com/*/*"]
+  }
+}
+```
+
+
+# provider开发
+https://learn.hashicorp.com/tutorials/terraform/provider-setup?in=terraform/providers
+
+## 将数据源添加到提供者
+现在您已经定义了数据源，您可以将其添加到您的提供程序。
+
+在您的hashicups/provider.go文件中，将咖啡数据源添加到DataSourcesMap. 该DataSourcesMap属性采用数据源名称、hashicups_coffees和中*schema.Resource定义的映射hashicups/data_source_coffee.go。资源和数据源名称必须遵循<provider>_<resource_name>约定。
+```
+hashicups/data_source_coffee.go
+// Provider -
+func Provider() *schema.Provider {
+   return &schema.Provider{
+      ResourcesMap: map[string]*schema.Resource{},
+      DataSourcesMap: map[string]*schema.Resource{
+            "hashicups_coffees":     dataSourceCoffees(),
+      },
+   }
+}
+```
