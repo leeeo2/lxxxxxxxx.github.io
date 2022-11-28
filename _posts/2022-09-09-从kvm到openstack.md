@@ -6,8 +6,20 @@ description: libvirt教程
 keywords: libvirt
 ---
 
-virsh 修改root密码
-https://blog.51cto.com/shyln/1890529
+virsh命令 
+| 命令                                               | 说明                         | 备注                     |
+| -------------------------------------------------- | ---------------------------- | ------------------------ |
+| virsh list                                         | 列出运行中的虚拟机           |
+| virsh list --all                                   | 列出所有define的虚拟机       |
+| virsh define vm.xml                                | 根据vm.xml描述文件创建虚拟机 |
+| virsh start [domain/id]                               | 开机                         |
+| virsh shutdown [domain/id]                            | 关机                         |
+| virsh reboot [domain/id]
+| virsh destroy [domain/id]                             | 断电                         |
+| virsh undefine [domain/id]                            | 删除虚拟机                   |
+| virsh console [domain/id]| 连接虚拟机console |
+| virsh set-user-password [domain/id] [user] [password] | 修改虚拟机root密码           | 需要安装qemu-guest-agent |
+
 
 如果在openstack平台上创建虚拟机时要传入密码则安装cloud-init即可。
 
